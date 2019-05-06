@@ -1,4 +1,5 @@
 ﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -23,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,7 +45,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.3.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.3.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=8.0.16.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.16\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -67,10 +83,118 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="dashboard.aspx" />
+    <Content Include="default.aspx" />
+    <Content Include="login.aspx" />
+    <Content Include="reports.aspx" />
+    <Content Include="response.aspx" />
     <Content Include="Web.config" />
+    <Content Include="web\template\css\style.css" />
+    <Content Include="web\template\images\dashboard\circle.svg" />
+    <Content Include="web\template\images\dashboard\img_1.jpg" />
+    <Content Include="web\template\images\dashboard\img_2.jpg" />
+    <Content Include="web\template\images\dashboard\img_3.jpg" />
+    <Content Include="web\template\images\dashboard\img_4.jpg" />
+    <Content Include="web\template\images\faces-clipart\pic-1.png" />
+    <Content Include="web\template\images\faces-clipart\pic-2.png" />
+    <Content Include="web\template\images\faces-clipart\pic-3.png" />
+    <Content Include="web\template\images\faces-clipart\pic-4.png" />
+    <Content Include="web\template\images\faces\face1.jpg" />
+    <Content Include="web\template\images\faces\face10.jpg" />
+    <Content Include="web\template\images\faces\face11.jpg" />
+    <Content Include="web\template\images\faces\face12.jpg" />
+    <Content Include="web\template\images\faces\face13.jpg" />
+    <Content Include="web\template\images\faces\face14.jpg" />
+    <Content Include="web\template\images\faces\face15.jpg" />
+    <Content Include="web\template\images\faces\face16.jpg" />
+    <Content Include="web\template\images\faces\face17.jpg" />
+    <Content Include="web\template\images\faces\face18.jpg" />
+    <Content Include="web\template\images\faces\face19.jpg" />
+    <Content Include="web\template\images\faces\face2.jpg" />
+    <Content Include="web\template\images\faces\face20.jpg" />
+    <Content Include="web\template\images\faces\face21.jpg" />
+    <Content Include="web\template\images\faces\face22.jpg" />
+    <Content Include="web\template\images\faces\face23.jpg" />
+    <Content Include="web\template\images\faces\face24.jpg" />
+    <Content Include="web\template\images\faces\face25.jpg" />
+    <Content Include="web\template\images\faces\face26.jpg" />
+    <Content Include="web\template\images\faces\face27.jpg" />
+    <Content Include="web\template\images\faces\face3.jpg" />
+    <Content Include="web\template\images\faces\face4.jpg" />
+    <Content Include="web\template\images\faces\face5.jpg" />
+    <Content Include="web\template\images\faces\face6.jpg" />
+    <Content Include="web\template\images\faces\face7.jpg" />
+    <Content Include="web\template\images\faces\face8.jpg" />
+    <Content Include="web\template\images\faces\face9.jpg" />
+    <Content Include="web\template\images\favicon.png" />
+    <Content Include="web\template\images\logo-mini.svg" />
+    <Content Include="web\template\images\logo.svg" />
+    <Content Include="web\template\js\chart.js" />
+    <Content Include="web\template\js\dashboard.js" />
+    <Content Include="web\template\js\file-upload.js" />
+    <Content Include="web\template\js\misc.js" />
+    <Content Include="web\template\js\off-canvas.js" />
+    <Content Include="web\template\pages\charts\chartjs.html" />
+    <Content Include="web\template\pages\forms\basic_elements.html" />
+    <Content Include="web\template\pages\icons\mdi.html" />
+    <Content Include="web\template\pages\samples\blank-page.html" />
+    <Content Include="web\template\pages\samples\error-404.html" />
+    <Content Include="web\template\pages\samples\error-500.html" />
+    <Content Include="web\template\pages\samples\login.html" />
+    <Content Include="web\template\pages\samples\register.html" />
+    <Content Include="web\template\pages\tables\basic-table.html" />
+    <Content Include="web\template\pages\ui-features\buttons.html" />
+    <Content Include="web\template\pages\ui-features\typography.html" />
+    <Content Include="web\template\partials\_footer.html" />
+    <Content Include="web\template\partials\_navbar.html" />
+    <Content Include="web\template\partials\_sidebar.html" />
+    <Content Include="web\template\vendors\css\vendor.bundle.base.css" />
+    <Content Include="web\template\vendors\iconfonts\mdi\css\materialdesignicons.css" />
+    <Content Include="web\template\vendors\iconfonts\mdi\css\materialdesignicons.min.css" />
+    <Content Include="web\template\vendors\iconfonts\mdi\fonts\materialdesignicons-webfont.svg" />
+    <Content Include="web\template\vendors\iconfonts\mdi\preview.html" />
+    <Content Include="web\template\vendors\js\vendor.bundle.addons.js" />
+    <Content Include="web\template\vendors\js\vendor.bundle.base.js" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="code\SqlHandle.cs" />
+    <Compile Include="code\Utils.cs" />
+    <Compile Include="dashboard.aspx.cs">
+      <DependentUpon>dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dashboard.aspx.designer.cs">
+      <DependentUpon>dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="reports.aspx.cs">
+      <DependentUpon>reports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="reports.aspx.designer.cs">
+      <DependentUpon>reports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="response.aspx.cs">
+      <DependentUpon>response.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="response.aspx.designer.cs">
+      <DependentUpon>response.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -80,12 +204,36 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="web\template\fonts\Ubuntu\Ubuntu-Bold.eot" />
+    <Content Include="web\template\fonts\Ubuntu\Ubuntu-Bold.ttf" />
+    <Content Include="web\template\fonts\Ubuntu\Ubuntu-Bold.woff" />
+    <Content Include="web\template\fonts\Ubuntu\Ubuntu-Bold.woff2" />
+    <Content Include="web\template\fonts\Ubuntu\Ubuntu-Light.eot" />
+    <Content Include="web\template\fonts\Ubuntu\Ubuntu-Light.ttf" />
+    <Content Include="web\template\fonts\Ubuntu\Ubuntu-Light.woff" />
+    <Content Include="web\template\fonts\Ubuntu\Ubuntu-Light.woff2" />
+    <Content Include="web\template\fonts\Ubuntu\Ubuntu-Medium.eot" />
+    <Content Include="web\template\fonts\Ubuntu\Ubuntu-Medium.ttf" />
+    <Content Include="web\template\fonts\Ubuntu\Ubuntu-Medium.woff" />
+    <Content Include="web\template\fonts\Ubuntu\Ubuntu-Medium.woff2" />
+    <Content Include="web\template\fonts\Ubuntu\Ubuntu-Regular.eot" />
+    <Content Include="web\template\fonts\Ubuntu\Ubuntu-Regular.ttf" />
+    <Content Include="web\template\fonts\Ubuntu\Ubuntu-Regular.woff" />
+    <Content Include="web\template\fonts\Ubuntu\Ubuntu-Regular.woff2" />
+    <Content Include="web\template\vendors\iconfonts\mdi\fonts\materialdesignicons-webfont.eot" />
+    <Content Include="web\template\vendors\iconfonts\mdi\fonts\materialdesignicons-webfont.ttf" />
+    <Content Include="web\template\vendors\iconfonts\mdi\fonts\materialdesignicons-webfont.woff" />
+    <Content Include="web\template\vendors\iconfonts\mdi\fonts\materialdesignicons-webfont.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ProjectExtensions>
