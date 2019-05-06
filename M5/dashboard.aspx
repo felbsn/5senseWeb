@@ -56,14 +56,6 @@
 
 
 
-
-
-
-
-
-
-
-
 %>
 
 
@@ -265,39 +257,48 @@
         <ul class="nav">
 
 
-            <!--
           <li class="nav-item nav-profile">
             <a href="#" class="nav-link">
-              <div class="nav-profile-image">
-                <img src="web/template/images/faces/face1.jpg" alt="profile">
-                <span class="login-status online"></span>               
-              </div>
+ 
               <div class="nav-profile-text d-flex flex-column">
-                <span class="font-weight-bold mb-2">David Grey. H</span>
-                <span class="text-secondary text-small">Project Manager</span>
+                <span class="font-weight-bold mb-2"><%=U.name + " "+ U.surname %></span>
+                <span class="text-secondary text-small"> ... </span>
               </div>
               <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
             </a>
           </li>
+
+            
+            
           <li class="nav-item">
             <a class="nav-link" href="dashboard.aspx">
-              <span class="menu-title">Dashboard</span>
+              <span class="menu-title">Ana Ekran</span>
               <i class="mdi mdi-home menu-icon"></i>
             </a>
           </li>
+                        
+          <li class="nav-item">
+            <a class="nav-link" href="dashboard.aspx">
+              <span class="menu-title">Hesap Ayarları</span>
+              <i class="mdi mdi-account-settings-variant menu-icon"></i>
+            </a>
+          </li>
+           
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <span class="menu-title">UI Elements</span>
+              <span class="menu-title">İstekler</span>
               <i class="menu-arrow"></i>
               <i class="mdi mdi-crosshairs-gps menu-icon"></i>
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="web/template/pages/ui-features/buttons.html">Buttons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="web/template/pages/ui-features/typography.html">Typography</a></li>
+                <li class="nav-item"> <a class="nav-link" href="#">Rapor Talep</a></li>
+                <li class="nav-item"> <a class="nav-link" href="#">İzleme Aralığı</a></li>
               </ul>
             </div>
           </li>
+
+             <!--
           <li class="nav-item">
             <a class="nav-link" href="pages/icons/mdi.html">
               <span class="menu-title">Icons</span>
@@ -794,7 +795,7 @@
             simpleGradient('rgba(218, 140, 255, 1)', 'rgba(154, 85, 255, 1)'),
             simpleGradient('rgba(54, 215, 232, 1)', 'rgba(177, 148, 250, 1)'),
             simpleGradient('#606033' ,'#f0f069'),
-            simpleGradient('#000000', '#ffffff'),
+            simpleGradient('#aabbaa', '#bbeebb'),
             simpleGradient('#ababab' ,'#faafaf'),
         ]
 
@@ -940,9 +941,14 @@
         var trafficChartData = {
 
                     labels: [
-          'İnternet',
-          'Tv',
-          'Radyo',
+        <%
+        for (int i = 0; i < statistics.Rows.Count; i++)
+        {
+            if (i != 0) Response.Write(",");
+            string value = (string)statistics.Rows[i][1] ;
+            Response.Write($"'{value}'");
+        }
+        %>
         ],
           datasets: [{
 
