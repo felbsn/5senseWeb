@@ -131,7 +131,7 @@
                 Activity Log
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
+              <a id="log-out-user" class="dropdown-item" href="#">
                 <i class="mdi mdi-logout mr-2 text-primary"></i>
                 Signout
               </a>
@@ -243,7 +243,7 @@
             </div>
           </li>
           <li class="nav-item nav-logout d-none d-lg-block">
-            <a class="nav-link" href="#">
+            <a id="log-out" class="nav-link" href="#">
               <i class="mdi mdi-power"></i>
             </a>
           </li>
@@ -717,6 +717,66 @@
   <!-- End custom js for this page-->
 
     <script>
+        
+        $("#log-out").click(function (e) {
+            e.preventDefault();
+
+ 
+
+          
+                $.ajax({
+                    type: 'POST',
+                    url: 'logOut.aspx',
+                    success: function (data) {
+
+                        console.log("logout succesfull "  );
+                        window.location = "login.aspx"
+ 
+                    },
+                    error: function () {
+
+                        console.log("logout unsuccessful "  );
+                    }
+                });
+           
+
+
+        });
+
+                
+        $("#log-out-user").click(function (e) {
+            e.preventDefault();
+
+ 
+
+          
+                $.ajax({
+                    type: 'POST',
+                    url: 'logOut.aspx',
+                    success: function (data) {
+
+                        console.log("logout succesfull "  );
+                        window.location = "login.aspx"
+ 
+                    },
+                    error: function () {
+
+                        console.log("logout unsuccessful "  );
+                    }
+                });
+           
+
+
+        });
+
+
+
+
+        ////////////////log-out
+
+
+
+
          var ctxi = document.getElementById('visit-sale-chart').getContext("2d");
         function simpleGradient( cbegin, cend) {
             var col = ctxi.createLinearGradient(0, 0, 0, 181);

@@ -4,15 +4,14 @@
 
      if (Request.Form["username"] != null)
      {
-                 
- 
+                
          string username = Request.Form["username"];
           string password = Request.Form["password"];
 
          SqlHandle handle = new SqlHandle();
 
          var data = handle.Select($"select username , id  , name , surname ,utype  from user where username = '{username}' and userpassword='{password}'");
- 
+
          if(data.Rows.Count == 0)
          {
              Response.Clear();
